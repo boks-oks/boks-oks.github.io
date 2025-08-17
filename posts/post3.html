@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <title>firefox web apps</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>boks blog</h1>
+    </header>
+    <main>
+        <nav>
+            <a href="../index.html">home</a>
+        </nav>
+        <article>
+            <h2>firefox web apps</h2>
+            <p>In the latest Nightly build of Firefox, you can now save web apps as independent windows.</p>
+            <p>Chromium-based browsers have offered this feature for a while, but it's nice to see Firefox finally having this capability.</p>
+            <p>It's <i>not</i> exactly like Chromium, though. Unlike Chromium, Firefox still shows the address bar and extensions.</p>
+            <img src="../attachments/firefox-windowed-app.png" alt="A screenshot of the new Firefox web apps feature.">
+            <p>I personally prefer this approach because it still allows you to access the extensions easily.</p>
+            <p>One thing I don't like is that the app in the Start Menu doesn't use a proper title, instead it uses the first word in the website's URL.</p>
+            <p>For example, if the website is "https://github.com/", the app will just be titled "Github". It should have proper capitalization: "GitHub".</p>
+            <p>The app icon is fine, though. It uses the favicon. However, I think a prompt for entering the title (similar to the bookmarks) would be nice.</p>
+        </article>
+    </main>
+    <section id="comments">
+        <script src="https://giscus.app/client.js"
+                data-repo="boks-oks/main"
+                data-repo-id="R_kgDOPeQE9g"
+                data-category-id="DIC_kwDOPeQE9s4CuPyx"
+                data-mapping="pathname"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="https://boks-oks.github.io/main/style.css"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </section>
+    <script>
+    document.querySelectorAll('article img').forEach(img => {
+        img.addEventListener('click', function() {
+            const popupBg = document.createElement('div');
+            popupBg.className = 'img-popup-bg';
+
+            const popupImg = document.createElement('img');
+            popupImg.src = img.src;
+
+            // Add message
+            const msg = document.createElement('div');
+            msg.textContent = 'Click anywhere to close.';
+            msg.style.color = '#fafafa';
+            msg.style.textAlign = 'center';
+            msg.style.marginTop = '1rem';
+            msg.style.fontSize = '1.1rem';
+
+            // Container for image and message
+            const popupContainer = document.createElement('div');
+            popupContainer.style.display = 'flex';
+            popupContainer.style.flexDirection = 'column';
+            popupContainer.style.alignItems = 'center';
+
+            popupContainer.appendChild(popupImg);
+            popupContainer.appendChild(msg);
+            popupBg.appendChild(popupContainer);
+
+            popupBg.addEventListener('click', () => popupBg.remove());
+            document.body.appendChild(popupBg);
+        });
+    });
+    </script>
+</body>
+</html>
+
