@@ -16,7 +16,7 @@
         <article>
             <h2>windows 8.x store revival?</h2>
             <p>so I was just using mitmproxy to look for more stuff to revive, and I found that the store requests one URL that is <i>supposed</i> to return URLs for certain resources the store uses.</p>
-            <p><a href="https://sls.update.microsoft.com/SLS/%7B9482F4B4-E343-43B6-B170-9A65BC822C77%7D/x64/6.3.9600.0/0?CH=860&L=en-US&P=&PT=0x65&WUA=7.9.9600.18340">It's an SLS (Service Locator Service) endpoint</a>. The file it downloads is a CAB titled "environment". It used to serve actual client data for the Store, but what is returns is quite different:</p>
+            <p><a href="https://sls.update.microsoft.com/SLS/%7B9482F4B4-E343-43B6-B170-9A65BC822C77%7D/x64/6.3.9600.0/0?CH=860&L=en-US&P=&PT=0x65&WUA=7.9.9600.18340">It's a SLS (Service Locator Service) endpoint</a>. The file it downloads is a CAB titled "environment". It used to serve actual client data for the Store, but what is returns is quite different:</p>
             <img src="../attachments/modern-env-cab-contained-xml.png" alt="The contents of the CAB's XML file.">
             <p>Notice that? StoreClientData isn't gone, just... empty.</p>
             <p>Now, there is a different GUID for the SLS URL, but they aren't compatible, and the store requires the SLS cab to be signed by Microsoft (something I can't do).</p>
@@ -76,4 +76,5 @@
     </script>
 </body>
 </html>
+
 
