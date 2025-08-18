@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>firefox web apps</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>boks blog</h1>
+    </header>
+    <main>
+        <nav>
+            <a href="../index.html">home</a>
+        </nav>
+        <article>
+            <h2>windows 8.x store revival?</h2>
+            <p>so I was just using mitmproxy to look for more stuff to revive, and I found that the store requests one URL that is <i>supposed</i> to return URLs for certain resources the store uses.</p>
+            <p><a href="https://sls.update.microsoft.com/SLS/%7B9482F4B4-E343-43B6-B170-9A65BC822C77%7D/x64/6.3.9600.0/0?CH=860&L=en-US&P=&PT=0x65&WUA=7.9.9600.18340">It's an SLS (Service Locator Service) endpoint</a>. The file it downloads is a CAB titled "environment". It used to serve actual client data for the Store, but what is returns is quite different:</p>
+            <img src="../attachments/modern-env-cab-contained-xml.png" alt="The contents of the CAB's XML file.">
+            <p>Notice that? StoreClientData isn't gone, just... empty.</p>
+            <p>Now, there is a different GUID for the SLS URL, but they aren't compatible, and the store requires the SLS cab to be signed by Microsoft (something I can't do).</p>
+            <p>You could say I could just patch the EXE to skip signature verification, but I don't feel like trying that yet.</p>
+            <p>I also tried a self-signed certificate, but that didn't work either.</p>
+            <p>Windows 8.0's store doesn't use the SLS cab at all, maybe it will be easier to revive?</p>
+            <p>I'll try to look for a CAB for Windows 8.1's store, then post again if I succeed.</p>
+        </article>
+    </main>
+    <section id="comments">
+        <script src="https://giscus.app/client.js"
+                data-repo="boks-oks/boks-oks.github.io"
+                data-repo-id="R_kgDOPeQE9g"
+                data-category-id="DIC_kwDOPeQE9s4CuPyx"
+                data-mapping="pathname"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="https://boks-oks.github.io/main/style.css"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </section>
+    <script>
+    document.querySelectorAll('article img').forEach(img => {
+        img.addEventListener('click', function() {
+            const popupBg = document.createElement('div');
+            popupBg.className = 'img-popup-bg';
+
+            const popupImg = document.createElement('img');
+            popupImg.src = img.src;
+
+            // Add message
+            const msg = document.createElement('div');
+            msg.textContent = 'Click anywhere to close.';
+            msg.style.color = '#fafafa';
+            msg.style.textAlign = 'center';
+            msg.style.marginTop = '1rem';
+            msg.style.fontSize = '1.1rem';
+
+            // Container for image and message
+            const popupContainer = document.createElement('div');
+            popupContainer.style.display = 'flex';
+            popupContainer.style.flexDirection = 'column';
+            popupContainer.style.alignItems = 'center';
+
+            popupContainer.appendChild(popupImg);
+            popupContainer.appendChild(msg);
+            popupBg.appendChild(popupContainer);
+
+            popupBg.addEventListener('click', () => popupBg.remove());
+            document.body.appendChild(popupBg);
+        });
+    });
+    </script>
+</body>
+</html>
