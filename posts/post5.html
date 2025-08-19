@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>windows store revival follow up</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>boks blog</h1>
+    </header>
+    <main>
+        <nav>
+            <a href="../index.html">home</a>
+        </nav>
+        <article>
+            <h2>windows 8.x store revival follow up</h2>
+            <p>I mentioned in my last post that I would post again if I succeed.</p>
+            <p>I didn't succeed, but I found something interesting: the GUID changed after installing Legacy Update to try to fully update the system.</p>
+            <p>it changed to a GUID that actually has some archives, although I haven't been able to get the store to accept them, either.</p>
+            <p>nowadays this GUID returns this:</p>
+            <img src="../attachments/slsresponse.png" alt="image of the SLS response error">
+            <p>according to <a href="https://learn.microsoft.com/en-us/windows/win32/wua_sdk/wua-success-and-error-codes-">this microsoft learn page</a>, it means <code>WU_E_UNKNOWN_SERVICE</code>.</p>
+            <p>basically, the service was completely deleted after Windows 8.1's EOS.</p>
+            <p>even worse, the only archive just gives me these errors:</p>
+            <code>
+                <pre>
+2025-08-19	13:55:15:034	 816	 70	Misc	WARNING: WinHttp: WinHttpQueryHeaders(WINHTTP_QUERY_CONTENT_TYPE) for WINHTTP_QUERY_ETAG failed. error 0x80072f76
+2025-08-19	13:55:15:034	 816	 70	SLS	Failed to get the ETAG value with error 80072f76; ignoring...
+2025-08-19	13:55:15:034	 816	 70	SLS	Content Type for Response: application/octet-stream
+2025-08-19	13:55:15:034	 816	 70	Misc	WARNING: WinHttp: WinHttpQueryHeaders(WINHTTP_QUERY_CONTENT_TYPE) for X-Microsoft-SLSClientCache failed. error 0x80072f76
+2025-08-19	13:55:15:034	 816	 70	SLS	FATAL: SLS:CSLSDownloader::GetUrlContent: GetCustomResponseHeaderValue failed with 0x80072f76.
+2025-08-19	13:55:15:034	 816	 70	SLS	GetSLSExpireSecsInADay SecsInADay = 86400.
+2025-08-19	13:55:15:034	 816	 70	SLS	FATAL: SLS:CSLSDownloader::GetUrlContent: GetLastModifiedHeader failed with 0x80072f76.
+2025-08-19	13:55:15:034	 816	 70	SLS	GetResponse succeeded. The file was downloaded.
+2025-08-19	13:55:15:034	 816	 70	SLS	Validating response for service 117CAB2D-82B1-4B5A-A08C-4D62DBEE7782 ...
+2025-08-19	13:55:15:034	 816	 70	Misc	Validating signature for C:\Windows\SoftwareDistribution\SLS\117CAB2D-82B1-4B5A-A08C-4D62DBEE7782\sls.cab with dwProvFlags 0x00000080:
+2025-08-19	13:55:15:034	 816	 70	Misc	 Microsoft signed: NA
+2025-08-19	13:55:15:034	 816	 70	Misc	 Infrastructure signed: Yes
+2025-08-19	13:55:15:034	 816	 70	Misc	Validating signature for C:\Windows\SoftwareDistribution\SLS\117CAB2D-82B1-4B5A-A08C-4D62DBEE7782\TMP1682.tmp with dwProvFlags 0x00000080:
+2025-08-19	13:55:15:050	 816	 70	Misc	 Microsoft signed: NA
+2025-08-19	13:55:15:050	 816	 70	Misc	 Infrastructure signed: Yes
+2025-08-19	13:55:15:050	 816	 70	SLS	FATAL: SLS Response was invalid for service 117CAB2D-82B1-4B5A-A08C-4D62DBEE7782 - HTTPStatusCode[200]
+                </pre>
+            </code>
+            <p>although there are some errors about missing headers. maybe I just need to add them.</p>
+        </article>
+    </main>
+    <section id="comments">
+        <script src="https://giscus.app/client.js"
+                data-repo="boks-oks/boks-oks.github.io"
+                data-repo-id="R_kgDOPeQE9g"
+                data-category-id="DIC_kwDOPeQE9s4CuPyx"
+                data-mapping="pathname"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="https://boks-oks.github.io/style.css"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </section>
+    <script>
+    document.querySelectorAll('article img').forEach(img => {
+        img.addEventListener('click', function() {
+            const popupBg = document.createElement('div');
+            popupBg.className = 'img-popup-bg';
+
+            const popupImg = document.createElement('img');
+            popupImg.src = img.src;
+
+            // Add message
+            const msg = document.createElement('div');
+            msg.textContent = 'Click anywhere to close.';
+            msg.style.color = '#fafafa';
+            msg.style.textAlign = 'center';
+            msg.style.marginTop = '1rem';
+            msg.style.fontSize = '1.1rem';
+
+            // Container for image and message
+            const popupContainer = document.createElement('div');
+            popupContainer.style.display = 'flex';
+            popupContainer.style.flexDirection = 'column';
+            popupContainer.style.alignItems = 'center';
+
+            popupContainer.appendChild(popupImg);
+            popupContainer.appendChild(msg);
+            popupBg.appendChild(popupContainer);
+
+            popupBg.addEventListener('click', () => popupBg.remove());
+            document.body.appendChild(popupBg);
+        });
+    });
+    </script>
+</body>
+</html>
