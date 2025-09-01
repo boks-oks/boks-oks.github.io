@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <title>need help with a cab file</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>boks blog</h1>
+    </header>
+    <main>
+        <nav>
+            <a href="../index.html">home</a>
+        </nav>
+        <article>
+            <h2>need help with a cab file</h2>
+            <p>So I've been trying to find the cab Windows 8.1's Store requires, but to no avail.</p>
+            <p>Every time I supply a new cab, it rejects it. I've tried over 15 cab files, but none work.</p>
+            <img src="../attachments/store-loading-sls.png">
+            <p>And if you're wondering where I've been, now you know.</p>
+            <p>I don't want to spend another month trying. If you have any ideas (or a tested, working cab file), please let me know by leaving a comment.</p>
+            <p>On the other hand, if you know a way to bypass the cab file, please leave a comment as well.</p>
+            <p>Any encouragement would also help a lot. I'm a single "developer" with barely any knowledge about Python, so it feels overwhelming.</p>
+            <p>I know it sounds silly that I keep trying to do something most likely impossible, but I just want to re-experience the Store.</p>
+            <p>Thanks for reading, and again, any help would be appreciated.</p>
+        </article>
+    </main>
+    <section id="comments">
+        <script src="https://giscus.app/client.js"
+                data-repo="boks-oks/boks-oks.github.io"
+                data-repo-id="R_kgDOPeQE9g"
+                data-category-id="DIC_kwDOPeQE9s4CuPyx"
+                data-mapping="pathname"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="https://boks-oks.github.io/style.css"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </section>
+    <script>
+    document.querySelectorAll('article img').forEach(img => {
+        img.addEventListener('click', function() {
+            const popupBg = document.createElement('div');
+            popupBg.className = 'img-popup-bg';
+
+            const popupImg = document.createElement('img');
+            popupImg.src = img.src;
+
+            // Add message
+            const msg = document.createElement('div');
+            msg.textContent = 'Click anywhere to close.';
+            msg.style.color = '#fafafa';
+            msg.style.textAlign = 'center';
+            msg.style.marginTop = '1rem';
+            msg.style.fontSize = '1.1rem';
+
+            // Container for image and message
+            const popupContainer = document.createElement('div');
+            popupContainer.style.display = 'flex';
+            popupContainer.style.flexDirection = 'column';
+            popupContainer.style.alignItems = 'center';
+
+            popupContainer.appendChild(popupImg);
+            popupContainer.appendChild(msg);
+            popupBg.appendChild(popupContainer);
+
+            popupBg.addEventListener('click', () => popupBg.remove());
+            document.body.appendChild(popupBg);
+        });
+    });
+    </script>
+</body>
+</html>
+
+
